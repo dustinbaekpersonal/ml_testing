@@ -1,0 +1,2 @@
+data_path: data/
+data_name: [winequality-red.csv, winequality-white.csv]

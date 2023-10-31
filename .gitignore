@@ -1,0 +1,12 @@
+.ipynb_checkpoints
+**/__pycache__/
+**/.vs/
+**/.DS_Store
+.tool-versions
+.venv/
+data/*
+.ruff_cache
+.mypy_cache
+.pytest_cache
+.coverage.*
+.coverage

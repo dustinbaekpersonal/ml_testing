@@ -1,0 +1,69 @@
+fail_fast= true
+
+[project]
+requires-python =">=3.11"
+
+[tool.black]
+line-length = 110
+target-version = ['py311']
+
+[tool.ruff]
+# Never enforce `E501` (line length violations).
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "C",  # flake8-comprehensions
+    "B",  # flake8-bugbear
+]
+ignore = [
+    "B008",  # do not perform function calls in argument defaults
+    "C901",  # too complex
+]
+extend-exclude = [
+    "tests/*",
+]
+
+line-length = 110
+
+target-version = "py311"
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+disable_error_code = ["import"]
+
+[[tool.mypy.overrides]]
+module = "./src/configs/config.py"
+ignore_errors = true
+
+# Ignore import violations in all `__init__.py` files.
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["E402", "F401", "F403", "F811"]
+
+[tool.isort]
+line_length = 110
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+
+[tool.pytest.ini_options]
+addopts = """
+--cov-report term-missing \
+--cov src/ -ra \
+--cov-report xml:coverage.xml
+"""
+python_files=[
+    "test_*.py",
+]
+testpaths = [
+    "tests",
+]
+
+[tool.coverage.report]
+exclude_also = [
+    "if __name__ == .__main__.:",
+]

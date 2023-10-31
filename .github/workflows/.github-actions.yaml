@@ -1,0 +1,41 @@
+name: Build & Test Python
+
+on: [push]
+
+jobs:
+  test-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip pip-tools
+          python --version
+          pip --version
+          python3 -m venv .venv
+          source .venv/bin/activate
+          echo PATH=$PATH >> $GITHUB_ENV
+          pip install -r requirements-dev.txt
+
+      - name: Linting
+        run: |
+          ruff check src/ -q
+          mypy src/ tests/
+        continue-on-error: true
+
+      - name: Formatting
+        run: |
+          black . --check
+          isort . --check
+
+      - name: Testing with pytest
+        run: |
+          source .venv/bin/activate
+          pip install -r requirements.txt
+          pytest tests/
