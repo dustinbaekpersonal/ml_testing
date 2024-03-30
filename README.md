@@ -9,7 +9,7 @@ To take part in the training course you will need to clone this repository and s
 First clone the repo. In a terminal, navigate to a folder you want to clone the code to then run:
 
 ```bash
-$ git clone https://github.com/danalyticsuk/ml_test_training.git
+$ git clone git@github.com:dustinbaekpersonal/ml_testing.git
 ```
 
 We will use conda for the virtual environment for this training. To get this set up, you will need to have anaconda already installed on your machine. To set it up and activate run:
